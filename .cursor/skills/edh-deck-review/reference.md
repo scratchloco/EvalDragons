@@ -41,24 +41,24 @@ Example:
 curl -sS "https://archidekt.com/api/decks/<DECK_ID>/" | head -c 2000
 ```
 
-Deck JSON includes **`categories`**: `[ { "name": "<Category name>", "cards": [ … ] }, … ]`.
+**Deck rows:** the authoritative list is the top-level **`cards`** array (each row: `quantity`, `categories[]`, `card.oracleCard`, optional `deletedAt`).
 
-Each element in **`cards`** usually has `quantity` and nested card data (often `card.oracleCard.name` or `card.name` depending on API version—inspect the payload if a field is missing).
+**`deck.categories`:** still present as folder metadata `{ "name": "Land", "cards": [] }`, but the nested **`cards`** arrays are often **empty**. **Do not** assign main/side/maybe from those arrays alone—use each **`cards[]` element’s own `categories`** tags.
 
-**Map category → zone** using `categories[].name` (trim, case-insensitive):
+**Per-row zone** (inspect `cards[i].categories`, case-insensitive):
 
-| If `name` matches (examples) | Zone |
-|------------------------------|------|
-| `Sideboard` | Sideboard |
+| Tag on the row | Zone |
+|----------------|------|
 | `Maybeboard`, `Maybe board`, `Considering`, … | Maybeboard |
-| `Commander`, `Commanders`, `Partner`, `Signature Spell`, … | Main + commander |
-| `Mainboard`, `Main`, `Deck`, or other custom section titles | Main + commander **unless** the name clearly matches side/maybe rows above |
+| `Sideboard` | Sideboard |
+| `Commander` (and not maybe/side) | Main + commander (command zone) |
+| Other tags only (`Land`, `Ramp`, `Creature`, …) | Main (99); still part of **Main + commander** for the deck’s primary pool |
 
-User-created category names like “Creatures” or “Ramp” → **Main + commander**. When unsure, note the mapping in the review.
+**Oracle name:** `cards[i].card.oracleCard.name` (fallback: inspect `card` if structure differs).
 
-**Per-zone card list:** concatenate all `cards` entries from every category assigned to that zone; sum quantities for the **Deck zones** table.
+**Deck zones table:** sum `quantity` per zone after classifying every non-deleted row.
 
-**Core evaluation:** run Scryfall / ratios / synergy / brackets / goldfish on **Main + commander** cards only—never merge side/maybe quantities into those steps. SB/MB remain separate optional add hints.
+**Core evaluation:** Scryfall / ratios / synergy / brackets / goldfish use **Main + commander** rows only (exclude rows whose `categories` include **Maybeboard** or **Sideboard**). SB/MB remain optional add hints.
 
 If `curl` fails, use exported JSON into `decks/incoming/` and apply the same rules.
 

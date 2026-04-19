@@ -7,3 +7,4 @@ __pycache__/
 venv/
 decks/incoming/*.json
 !decks/incoming/.gitkeep
+!decks/incoming/snail-bomber-archidekt.json

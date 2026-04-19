@@ -1,6 +1,6 @@
 # Deck sources
 
-Store one deck per file under `decks/`, for example `decks/my-deck.md`.
+Store one deck per file under `decks/`, for example `decks/my-deck.md`. Example with `Source`, `target_bracket`, and organized sections: [`snail-bomber.md`](snail-bomber.md).
 
 ## Recommended content
 

@@ -3,7 +3,8 @@ name: edh-deck-review
 description: >-
   Evaluates Commander (EDH) decks from Moxfield or Archidekt URLs using Scryfall
   for oracle-accurate card data. URL ingest parses mainboard, sideboard, and
-  maybeboard separately (Moxfield keys; Archidekt categories), then uses main +
+  maybeboard separately (Moxfield keys; Archidekt per-card category tags on the
+  cards array), then uses main +
   commander only for core analysis. Legality and bans, core slot
   ratios (lands,
   ramp, draw, removal, wipes, synergy), commander synergy axes, Wizards
@@ -51,15 +52,16 @@ Each of those keys is an **object** (map of deck-slot id → `{ quantity, card: 
 
 **Archidekt** — `GET https://archidekt.com/api/decks/{id}/`:
 
-- Deck payload includes **`categories`**: an array of `{ "name": "<string>", "cards": [ … ] }` (exact inner card shape varies; each entry has **quantity** and nested **card / oracleCard** name fields—see `reference.md`).
-- For **each** category, assign a zone from **`categories[].name`** (trim, case-insensitive):
-  - Name **exactly or clearly** `Sideboard` → **Sideboard**.
-  - Name **`Maybeboard`**, **`Maybe board`**, or common synonyms like **`Considering`** → **Maybeboard**.
-  - Name **`Commander`**, **`Commanders`**, **`Partner`**, **`Signature Spell`** (if present) → **Main + commander** (command zone for EDH).
-  - **`Mainboard`**, **`Main`**, **`Deck`**, or **custom** category names that are **not** matched as side/maybe above → **Main + commander** (user-named buckets like “Ramp” still count as main unless the name matches side/maybe rules).
-- If a category name is ambiguous, **state the assumption** in the report and map it to one zone; prefer treating unknown custom names as **main** only when they read like deck sections, not “Maybe.”
+- **Primary deck list:** the top-level **`cards`** array. Each element is one deck row with **`quantity`**, **`categories`** (string tags: e.g. `Land`, `Commander`, `Maybeboard`, `Sideboard`, `Ramp`, `Creature`, …), and **`card.oracleCard`** (oracle `name`, `cmc`, `legalities`, etc.). Skip rows where **`deletedAt`** is set.
+- **Do not rely on `deck.categories[].cards` alone** — on many exports those inner **`cards`** arrays are **empty**; zone logic must use each **`cards[]` row’s `categories`**.
+- **Per-row zone** (case-insensitive tag match on that row’s `categories`):
+  - If **`Maybeboard`** (or common synonym **`Considering`**) → **Maybeboard** zone.
+  - Else if **`Sideboard`** → **Sideboard** zone.
+  - Else if the row represents the commander (typically includes **`Commander`** and **not** maybe/side) → **Main + commander** (command zone).
+  - Else → **Main** (counts toward the 99; still **Main + commander** bucket for the Deck zones table’s main slice).
+- User folder tags (`Ramp`, `Creature`, …) **do not** imply maybe/side; they are main-deck organization unless **Maybeboard** / **Sideboard** tags are present.
 
-If blocked, use export JSON in `decks/incoming/` and apply the **same** zone rules.
+If blocked, use export JSON in `decks/incoming/` and apply the **same** row rules.
 
 **Scope (strict) for core math:** Only **Main + commander** cards feed Scryfall bulk resolution for legality, ratios, synergy, brackets, and goldfish. **Never** merge sideboard or maybeboard quantities into those steps.
 
