@@ -25,11 +25,7 @@ Response uses **top-level zone objects**, each an **object map** (not arrays): k
 Quick inspection (optional):
 
 ```bash
-curl -sS "https://api.moxfield.com/v2/decks/all/<PUBLIC_ID>" | \
-  python3 -c "import json,sys;d=json.load(sys.stdin);\
-def n(z): return sum((v.get('quantity')or 1) for v in (d.get(z)or{}).values());\
-print('mainboard',n('mainboard'),'commanders',n('commanders'),\
-'sideboard',n('sideboard'),'maybeboard',n('maybeboard'))"
+curl -sS "https://api.moxfield.com/v2/decks/all/<PUBLIC_ID>" | python3 -c 'import json,sys;d=json.load(sys.stdin);n=lambda z: sum((v.get("quantity") or 1) for v in (d.get(z) or {}).values());print("mainboard",n("mainboard"),"commanders",n("commanders"),"sideboard",n("sideboard"),"maybeboard",n("maybeboard"))'
 ```
 
 **URL ingest — zones:** For **core evaluation**, use **`commanders` + `mainboard` only**. **`sideboard`** and **`maybeboard`** are still **parsed and reported** in the “Deck zones” table; use them only as **optional add hints** in suggestions—not as the sole upgrade pool (see skill §7).
