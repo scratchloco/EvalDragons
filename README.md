@@ -9,6 +9,7 @@ Commander (EDH) deck lab: skills and rules for **Scryfall-backed** reviews, **co
 1. `git clone https://github.com/scratchloco/EvalDragons.git`
 2. Open the folder in **Cursor** so project [`.cursor/skills/edh-deck-review/SKILL.md`](.cursor/skills/edh-deck-review/SKILL.md) and [`.cursor/rules/`](.cursor/rules/) load.
 3. **Pull before** a long review session so skills/rules stay current.
+4. After adding or updating deck notes and reviews, **commit and push** so GitHub stays the source of truth (see the skill’s **GitHub** bullet).
 
 ## Layout
 
