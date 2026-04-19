@@ -1,13 +1,26 @@
 ---
-description: Verify MTG card facts via Scryfall in EvalDragons deck work
+description: Verify MTG card facts and mechanical synergy via Scryfall
 globs: decks/**/*.{md,txt},reviews/**/*.md,**/*deck*.md
 alwaysApply: false
 ---
 
-# Scryfall data integrity
+# Scryfall Data Integrity (EvalDragons Rigorous)
 
-For Commander deck content in this repo:
+For all Commander deck work, you must prioritize "Oracle Truth" over model training data to prevent hallucinated synergies or illegal suggestions.
 
-- Do **not** rely on memory for oracle text, mana costs, color identity, or Commander legality.
-- Resolve cards with **Scryfall** (`/cards/named`, `/cards/collection`, or documented search URLs) before asserting mechanics.
-- If Scryfall is unreachable, say so and avoid speculative oracle wording.
+## 1. Mandatory Oracle Verification
+- [cite_start]**Zero-Guess Policy:** Do not rely on memory for mana costs, color identity, or oracle text[cite: 17].
+- [cite_start]**Synergy Search:** When evaluating a deck theme (e.g., "Norin ETB"), you must use Scryfall search syntax (e.g., `o:"enters the battlefield"`) to verify that suggested cards actually trigger the intended mechanic.
+- **Color Identity Audit:** Strictly verify that every card in the 99 matches the Commander's color identity.
+
+## 2. Personal Ban List & Legality
+- **Hard Constraints:** If a deck contains **Mana Crypt**, **Jeweled Lotus**, or **Dockside Extortionist**, you must flag them as illegal for this profile's environment and suggest a synergy-based replacement.
+- [cite_start]**Scryfall API Check:** Use `/cards/named` or `/cards/collection` to confirm current Commander legality.
+- [cite_start]**Fallback Protocol:** If Scryfall is unreachable, state this clearly and cease all mechanical assertions to avoid speculative errors.
+
+## 3. Data Attribution
+- [cite_start]**Link Integrity:** Prefer `scryfall_uri` in all notes when referencing specific card interactions[cite: 16].
+- **Formatting:** When listing card stats, use clear colons or parentheses. 
+
+## 4. Style Constraint
+- **NO EM DASHES:** This rule is absolute. Use colons, semicolons, or periods to separate clauses in all data reports and card descriptions.
