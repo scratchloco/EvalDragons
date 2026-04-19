@@ -45,7 +45,7 @@ Compare file sections to [`deck-organization.md`](../../../deck-organization.md)
 
 ### 5. Core ratio table (required)
 
-Use targets from [`.cursor/rules/edh-core-ratios.mdc`](../../rules/edh-core-ratios.mdc):
+Use targets from [`edh-core-ratios.mdc`](../../rules/edh-core-ratios.mdc):
 
 | Bucket | Target |
 |--------|--------|
