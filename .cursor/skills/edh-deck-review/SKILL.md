@@ -137,96 +137,68 @@ Three hands (fast / medium / flood-screw). Turns 1–4: lands, ramp, spells, man
 
 Fill every section. Use **N/A** with a brief reason only where instructed (e.g. no tutors). Sentiment, strategy, play lines, and tutor guidance must be **grounded in the resolved main+commander list** and Scryfall text—not generic Commander advice.
 
-```markdown
-# EDH review: <Deck name>
+## Output Style Constraints
+**CRITICAL:** You are strictly forbidden from using em dashes in the generated output. Use colons, semicolons, parentheses, or standard bullet points to separate thoughts.
 
-## Deck source
-- URL / file:
-- Commander:
-- **Core list scope:** main + commander only (sideboard / maybeboard excluded from counts and core analysis; see Outside-list section for optional SB/MB add hints).
+## Report template
+# EDH Tactical Review: <Deck name>
 
-## Deck zones (from URL) — required when ingesting from Moxfield / Archidekt
-| Zone | Total cards (sum of qty) | Notes |
-|------|---------------------------|--------|
-| Main + commander | … | Source keys / category names used |
-| Sideboard | … | |
-| Maybeboard | … | |
-- If any zone is empty, write `0` and note.
+## Deck Source & Zone Extraction
+* URL / file: 
+* Commander: 
+* Scope: Main + Commander only. Sideboard and maybeboard excluded from core counts.
 
-## Target Commander Bracket
-- Goal (1–5):
-- Stated intent (if any):
+## Legality & Local Bans
+| Card | Status | Suggested Replacement (Synergy Focus) |
+|------|--------|---------------------------------------|
 
-## Legality table
-| Card | Commander legal | Notes |
-|------|-----------------|-------|
+## Core Ratios & Synergy Overrides
+| Bucket | Target | Actual | Delta | Rationale / Override |
+|--------|--------|--------|-------|----------------------|
 
-## Cleaned list delta
-- Removed illegal / identity errors for analysis:
+## The "Plan A" Audit (Strategic Summary)
+* **The Engine:** Explain exactly how the deck generates its unique advantage.
+* **The Spice:** Highlight 1 to 2 highly creative or non-traditional card interactions currently in the list.
+* **Tactical Vulnerabilities:** Identify where the deck folds.
 
-## Core ratio table
-| Bucket | Target | Actual | Delta | Notes |
-|--------|--------|--------|-------|-------|
-| Lands | … | … | … | AMV … |
-| Ramp | … | … | … | |
-| Card draw | … | … | … | burst vs steady |
-| Targeted removal | … | … | … | type coverage |
-| Board wipes | … | … | … | |
-| Synergy / strategy | … | … | … | |
-
-## Mana and curve
-- Nonland AMV:
-- CMC buckets summary:
-
-## Role density
-- Short paragraph + counts if useful.
-
-## Commander axes
-1. …
-
-## Synergy and alignment audit
-- Matrix summary:
-- Misaligned:
-- Cluster gaps:
-
-## Build value — general sentiment
-- Short qualitative take: is the deck coherent for its goals, under/over-built for its stated bracket, and does the card quality **support** the strategy (not a dollar value unless the user asked).
-
-## Strategic summary
-- 2–4 tight paragraphs: what the deck is trying to do, how it wins or stabilizes, main risks (speed, interaction, consistency), and how it wants the first few turns to feel.
-
-## Recommended play lines
-- Concrete **how to pilot** guidance: opening priorities (lands vs ramp vs setup), when to commit commander vs hold up mana, when to be the aggressor vs hold interaction, and 1–2 **example sequences** (real card names from the main list) for early / mid / late if relevant.
+## Interaction & Protection Quality
+* Stack Interaction density:
+* Board Wipe asymmetry:
+* Engine Protection:
 
 ## Tutor targets by game stage
-- **Include this section only if** the main+commander list contains **tutors** (cards that search library for cards, e.g. `Demonic Tutor`, `Worldly Tutor`, `Gamble`, equipment/artifact/creature tutors). If **no tutors**, write **N/A — no tutors in main+commander** and skip the table.
-- Otherwise provide a **stage table** (early ≈ turns 1–4, mid, late / win-ready). For each stage, list **the most efficient tutor targets** (3–6 per stage max) with one line each: **why this stage**, **what it enables**, and **which tutor** usually finds it.
+* **Condition:** Include this section only if the main deck contains tutors. If no tutors are present, write "N/A (no tutors in main deck)" and skip the table.
+* **Stage Table:** Provide a table for early (turns 1-4), mid, and late game. List 3 to 6 efficient targets per stage, explaining why it fits that stage and which tutor finds it.
 
 ## WOTC bracket fit
-- Game changers count:
-- Other flags (MLD, extra turns, combos heuristic):
-- Current vs target:
+* Game changers count:
+* Other flags (MLD, extra turns, combos heuristic):
+* Current vs target:
 
-## Outside-list candidates
-| Add | Why | Cut | Bracket note |
-|-----|-----|-----|--------------|
-- **Primary pool:** Scryfall-driven rows above (not limited to builder zones).
-- **Optional:** Cards from sideboard/maybeboard only as extra ideas — must not replace or shrink the Scryfall-based list.
+## Turns 1-4 Goldfish Simulation
+* Run three distinct opening hand scenarios to check for non-games and mana velocity.
+### Hand A (The Ideal Start)
+### Hand B (The Grinder)
+### Hand C (The Mulligan Test)
+
+## Recommended Play Lines & Piloting
+* **Opening Hands:** What constitutes a "keep" for this specific strategy.
+* **Deployment Timing:** When to deploy the commander versus holding up interaction.
+* **Closing the Game:** How to convert the engine's value into a definitive win.
+
+## Outside-List Upgrades (The Spice Rack)
+| Add | Cut | Why it elevates the specific strategy | Bracket note |
+|-----|-----|---------------------------------------|--------------|
+* **Constraint:** Do not suggest generic staples unless the deck lacks fundamental mana/draw. Focus on cards that synergize with the unique axes identified above.
 
 ## Bracket tuning plan
-1. …
+1. ...
 
 ## Organization audit
-- …
-
-## Turns 1–4 (three scenarios)
-### Hand A — …
-### Hand B — …
-### Hand C — …
+* ...
 
 ## Prioritized changes
-1. …
-```
+1. ...
 
 ## Limitations
 
