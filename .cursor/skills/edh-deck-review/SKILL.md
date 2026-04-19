@@ -93,60 +93,71 @@ Record **quantity × name** per zone; printings are metadata only.
 - For each card capture: `name`, `type_line`, `mana_cost`, `cmc`, `oracle_text`, `color_identity`, `legalities.commander`, `game_changer`, `scryfall_uri`.
 - For long lists prefer [`scripts/scryfall_collection.py`](../../../scripts/scryfall_collection.py).
 
-## 3. Legality and Adaptive Bans
+### Legality and Adaptive Bans
 * **Scryfall API Truth:** Flag any card where `legalities.commander != legal`. This automatically catches format-wide bans.
 * **Rule 0 Frontmatter Check:** Scan the top of the `.md` deck file for a `local_bans` YAML array. If present, flag those specific cards as illegal for the current review.
 * **Cleaned 99:** For math and synergy analysis, proceed as if all globally banned and locally banned cards have been removed from the list.
 
-## 4. Core ratio table (with Synergy Overrides)
+### Core ratio table (with Synergy Overrides)
 Use targets from `edh-core-ratios.mdc`. However, you must apply **Synergy Overrides** for non-traditional builds:
 * If the commander heavily manipulates a specific zone or card type, adjust the targets accordingly. Note any accepted deviations as a "Synergy Override" in the rationale column.
 * Do not penalize a low creature count if the deck reliably generates tokens or copies.
 * Emit a table: bucket, target, actual, delta, rationale. Commander excluded from 99; each nonland once in a primary bucket (document judgment calls).
 
-## 5. Tactical Sub-Audits
-* **The Protection Check:** Evaluate how the deck protects its primary engine. If the commander is vital, demand at least 5 protection pieces.
-* **Interaction Quality:** Distinguish between sorcery-speed removal and instant-speed stack interaction. Flag decks that cannot interact on the stack.
-* **Mana Velocity:** Analyze if the CMC of the ramp package aligns with casting the Commander ahead of schedule.
-
-### 6. Organization audit
+### Organization audit
 
 Compare file sections to [`deck-organization.md`](../../../deck-organization.md); call out mis-grouped cards and missing buckets.
 
-### 7. Commander axes and synergy
+### Commander axes and synergy
 
 - State **3–6 axes** from commander text/types.
 - Score nonlands: commander synergy, internal synergy, role fit, anti-synergy flags (Low/Med/High or 0–2).
 - Output synergy matrix, misaligned includes, redundancy, cluster gaps.
 
-### 8. Outside-list candidates (Scryfall)
-
-After gaps are clear, run **targeted** searches (`legal:commander` + identity, see `reference.md`). Return **10–25** cards with: fit reason, suggested cut, bracket impact. Verify each candidate on Scryfall before listing.
-
-**Sideboard / maybeboard and suggestions:** You may mention cards that appear in the list’s **sideboard** or **maybeboard** (or Archidekt out-of-main categories) as *optional “already in your ecosystem” add candidates*—but **do not** cap or narrow the improvement set to only those cards. The primary upgrade pool remains **Scryfall discovery** (and the main 99); treat SB/MB as a short optional subsection, not the full search space.
-
-### 9. Wizards Commander Brackets
-
+### Wizards Commander Brackets
 Use **official articles** linked in `reference.md` — do not invent bracket rules. Count **game_changer** from API; flag MLD, extra turns, heuristic two-card infinites. Compare **estimated current** bracket vs user **target** (from frontmatter or message). Deliver **adjustment playbook**: cuts, swaps, adds.
 
-### 10. Four-turn goldfish
 
-Three hands (fast / medium / flood-screw). Turns 1–4: lands, ramp, spells, mana floating, hand size — only real cards. No opponents. Note assumptions.
 
-## Report template
+# Technical Workflow
 
-Fill every section. Use **N/A** with a brief reason only where instructed (e.g. no tutors). Sentiment, strategy, play lines, and tutor guidance must be **grounded in the resolved main+commander list** and Scryfall text—not generic Commander advice.
+### 1. Ingest & Zone Triage
+**Separate zones immediately.** Only **Main + Commander** feed the core analysis (math, legality, goldfish).
+* **Moxfield:** Use `commanders` and `mainboard` keys for core; `sideboard` and `maybeboard` for secondary reference.
+* **Archidekt:** Use `categories` tags. If `Maybeboard` or `Considering` is present, exclude from core. If `Commander` is present, it is the lead. Everything else defaults to Main. Skip `deletedAt` rows.
 
-## Output Style Constraints
-**CRITICAL:** You are strictly forbidden from using em dashes in the generated output. Use colons, semicolons, parentheses, or standard bullet points to separate thoughts.
+### 2. Scryfall Resolution & Legality
+* **Fetch:** Name, type, cost, CMC, oracle text, identity, and `game_changer` status.
+* **Bans:** Flag `legalities.commander != legal`. 
+* **Local Bans:** Check the file frontmatter for a `local_bans` array and treat those as illegal for this specific review.
+
+### 3. Strategic Audit (The "Plan A" & Synergy)
+* **Define Axes:** Identify 3 to 6 primary functional axes (e.g., "Enchantment ETB," "Low CMC Aggro").
+* **Win Condition:** Explicitly identify how the deck ends the game (e.g., Commander damage, specific combo, over-run). Flag if the deck is "all engine, no finish."
+* **Synergy Overrides:** Adjust core ratio targets (from `edh-core-ratios.mdc`) based on these axes. A "Spellslinger" deck may have a "Synergy Override" for low creature counts.
+
+### 4. Tactical Sub-Audits
+* **Protection:** Demand at least 5 pieces for vital commanders.
+* **Interaction:** Distinguish between sorcery speed and instant speed stack interaction.
+* **Mana Base:** Check if land color production matches the pips in the spell list.
+
+### 5. Outside-List Discovery
+Search Scryfall for 10 to 25 candidates. 
+* **Sideboard Check:** Mention cards already in the user's Sideboard/Maybeboard if they fit the gaps.
+* **New Discoveries:** Provide "Spice" (highly synergistic) and "Power" (efficiency) options.
+
+### 6. Goldfish Simulation
+Run three hands for 4 turns. Note lands played, spells cast, and mana floating. 
+
+------
 
 ## Report template
 # EDH Tactical Review: <Deck name>
 
-## Deck Source & Zone Extraction
-* URL / file: 
-* Commander: 
-* Scope: Main + Commander only. Sideboard and maybeboard excluded from core counts.
+## Source & Metadata
+* **Source:** <URL or File Path>
+* **Commander:** <Name>
+* **Bracket:** <Estimated Current vs. Target>
 
 ## Legality & Local Bans
 | Card | Status | Suggested Replacement (Synergy Focus) |
