@@ -5,7 +5,7 @@ Store one deck per file under `decks/`, for example `decks/my-deck.md`.
 ## Recommended content
 
 - **Source URL**: Moxfield or Archidekt link on its own line: `Source: https://...`  
-  Reviews use **main deck + commander** from that URL only (not sideboard / maybeboard for core counts). SB/MB may be cited optionally as add ideas; suggestions are **not** limited to those zones—see the **edh-deck-review** skill.
+  The agent **parses mainboard, sideboard, and maybeboard separately** from the API (see skill §1 / `reference.md`), reports counts in **Deck zones**, then uses **main + commander** only for core counts. SB/MB may be cited optionally as add ideas; suggestions are **not** limited to those zones.
 - **Target bracket** (optional): in frontmatter, `target_bracket: 3` (Wizards 1–5).
 - **Sections**: follow [`../deck-organization.md`](../deck-organization.md).
 

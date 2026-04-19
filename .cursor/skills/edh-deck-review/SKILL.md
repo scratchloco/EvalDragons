@@ -2,8 +2,9 @@
 name: edh-deck-review
 description: >-
   Evaluates Commander (EDH) decks from Moxfield or Archidekt URLs using Scryfall
-  for oracle-accurate card data. URL ingest uses main deck + commander only
-  (not sideboard or maybeboard) for core analysis. Legality and bans, core slot
+  for oracle-accurate card data. URL ingest parses mainboard, sideboard, and
+  maybeboard separately (Moxfield keys; Archidekt categories), then uses main +
+  commander only for core analysis. Legality and bans, core slot
   ratios (lands,
   ramp, draw, removal, wipes, synergy), commander synergy axes, Wizards
   Commander Brackets and game changers, outside-list upgrade searches, and a
@@ -23,13 +24,44 @@ description: >-
 
 ### 1. Ingest list from URL
 
-**Scope (strict):** For builder URLs, build the evaluated list from **commander(s) + main deck only**. Do **not** include **sideboard** or **maybeboard** (or Archidekt equivalents such as sideboard / maybe / considering categories) in **any core step**: Scryfall normalization, legality table, core ratio counts, synergy matrix, bracket inventory (game changers, etc.), or goldfish hands.
+**Always triage zones first** so mainboard, sideboard, and maybeboard stay distinct in the write-up—even though only one zone feeds **core** analysis.
 
-**Moxfield**: `GET https://api.moxfield.com/v2/decks/all/{id}` — extract `id` from URLs like `https://www.moxfield.com/decks/{id}`. Use **`commanders`** + **`mainboard`** only. Ignore **`sideboard`**, **`maybeboard`**, and other zones for core evaluation.
+#### 1a. Zone extraction (required for URL ingest)
 
-**Archidekt**: `GET https://archidekt.com/api/decks/{id}/` — numeric `id` from deck URLs (e.g. `.../decks/1234567/...`). Map cards from the **main deck** (+ commanders) only; exclude sideboard and maybe / trial categories from core evaluation. If blocked, use user-provided export JSON in `decks/incoming/` (still strip non-main zones for core counts unless the user explicitly asks to include them).
+Build **three named lists** (quantity × card name) before Scryfall:
 
-Record **quantity × name**; printings are metadata only.
+| Zone | Purpose in review |
+|------|-------------------|
+| **Main + commander** | Core evaluation (§2–§6, §8–§9): merge commander(s) and main-deck cards only. |
+| **Sideboard** | Not in core counts; list separately; optional add hints in §7. |
+| **Maybeboard** | Not in core counts; list separately; optional add hints in §7. |
+
+**Moxfield** — `GET https://api.moxfield.com/v2/decks/all/{id}` (id = last segment of `https://www.moxfield.com/decks/{id}`):
+
+| JSON key | Zone |
+|----------|------|
+| `commanders` | **Main + commander** (object map: values have `quantity`, `card.name`) |
+| `mainboard` | **Main + commander** |
+| `sideboard` | **Sideboard** |
+| `maybeboard` | **Maybeboard** |
+
+Each of those keys is an **object** (map of deck-slot id → `{ quantity, card: { name, … } }`). Sum `quantity` per zone for the **Deck zones** report section. Do not use `tokens` or other keys as main unless the user asks.
+
+**Archidekt** — `GET https://archidekt.com/api/decks/{id}/`:
+
+- Deck payload includes **`categories`**: an array of `{ "name": "<string>", "cards": [ … ] }` (exact inner card shape varies; each entry has **quantity** and nested **card / oracleCard** name fields—see `reference.md`).
+- For **each** category, assign a zone from **`categories[].name`** (trim, case-insensitive):
+  - Name **exactly or clearly** `Sideboard` → **Sideboard**.
+  - Name **`Maybeboard`**, **`Maybe board`**, or common synonyms like **`Considering`** → **Maybeboard**.
+  - Name **`Commander`**, **`Commanders`**, **`Partner`**, **`Signature Spell`** (if present) → **Main + commander** (command zone for EDH).
+  - **`Mainboard`**, **`Main`**, **`Deck`**, or **custom** category names that are **not** matched as side/maybe above → **Main + commander** (user-named buckets like “Ramp” still count as main unless the name matches side/maybe rules).
+- If a category name is ambiguous, **state the assumption** in the report and map it to one zone; prefer treating unknown custom names as **main** only when they read like deck sections, not “Maybe.”
+
+If blocked, use export JSON in `decks/incoming/` and apply the **same** zone rules.
+
+**Scope (strict) for core math:** Only **Main + commander** cards feed Scryfall bulk resolution for legality, ratios, synergy, brackets, and goldfish. **Never** merge sideboard or maybeboard quantities into those steps.
+
+Record **quantity × name** per zone; printings are metadata only.
 
 ### 2. Scryfall normalization
 
@@ -93,6 +125,14 @@ Fill every section.
 - URL / file:
 - Commander:
 - **Core list scope:** main + commander only (sideboard / maybeboard excluded from counts and core analysis; see Outside-list section for optional SB/MB add hints).
+
+## Deck zones (from URL) — required when ingesting from Moxfield / Archidekt
+| Zone | Total cards (sum of qty) | Notes |
+|------|---------------------------|--------|
+| Main + commander | … | Source keys / category names used |
+| Sideboard | … | |
+| Maybeboard | … | |
+- If any zone is empty, write `0` and note.
 
 ## Target Commander Bracket
 - Goal (1–5):

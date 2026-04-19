@@ -11,9 +11,28 @@ Example:
 curl -sS "https://api.moxfield.com/v2/decks/all/<PUBLIC_ID>" | head -c 2000
 ```
 
-Response uses `mainboard`, `commanders`, etc. as maps of card keys → `{ quantity, card: { name, ... } }`.
+Response uses **top-level zone objects**, each an **object map** (not arrays): keys are internal card ids; values look like `{ "quantity": <int>, "card": { "name": "<Oracle name>", ... } }`.
 
-**URL ingest — zones:** For **core evaluation** (ratios, synergy, brackets, goldfish, legality counts), use **`commanders` + `mainboard` only**. Do **not** merge **`sideboard`** or **`maybeboard`** into that list. Those zones may be summarized later as **optional add hints** only; the main upgrade search remains **Scryfall**, not “SB/MB only.”
+| Key | Zone label |
+|-----|------------|
+| `commanders` | Main + commander |
+| `mainboard` | Main + commander |
+| `sideboard` | Sideboard |
+| `maybeboard` | Maybeboard |
+
+**Counting cards per zone:** iterate each map, sum `quantity` (default 1 if missing). **Do not** fold `sideboard` / `maybeboard` into main for core stats.
+
+Quick inspection (optional):
+
+```bash
+curl -sS "https://api.moxfield.com/v2/decks/all/<PUBLIC_ID>" | \
+  python3 -c "import json,sys;d=json.load(sys.stdin);\
+def n(z): return sum((v.get('quantity')or 1) for v in (d.get(z)or{}).values());\
+print('mainboard',n('mainboard'),'commanders',n('commanders'),\
+'sideboard',n('sideboard'),'maybeboard',n('maybeboard'))"
+```
+
+**URL ingest — zones:** For **core evaluation**, use **`commanders` + `mainboard` only**. **`sideboard`** and **`maybeboard`** are still **parsed and reported** in the “Deck zones” table; use them only as **optional add hints** in suggestions—not as the sole upgrade pool (see skill §7).
 
 ## Archidekt
 
@@ -26,9 +45,26 @@ Example:
 curl -sS "https://archidekt.com/api/decks/<DECK_ID>/" | head -c 2000
 ```
 
-Card arrays differ by API version; normalize to `{ name, quantity }`. If `curl` fails (auth, block), use exported JSON from the site UI into `decks/incoming/`.
+Deck JSON includes **`categories`**: `[ { "name": "<Category name>", "cards": [ … ] }, … ]`.
 
-**URL ingest — zones:** Include only cards in the **main deck** (and commanders) for core evaluation. Exclude **sideboard**, **maybeboard**, and other non-main categories from ratio/bracket/synergy/goldfish work—same policy as Moxfield. Optional mention of those cards for **swap ideas** is allowed; **do not** limit improvements to cards that appear only in those zones.
+Each element in **`cards`** usually has `quantity` and nested card data (often `card.oracleCard.name` or `card.name` depending on API version—inspect the payload if a field is missing).
+
+**Map category → zone** using `categories[].name` (trim, case-insensitive):
+
+| If `name` matches (examples) | Zone |
+|------------------------------|------|
+| `Sideboard` | Sideboard |
+| `Maybeboard`, `Maybe board`, `Considering`, … | Maybeboard |
+| `Commander`, `Commanders`, `Partner`, `Signature Spell`, … | Main + commander |
+| `Mainboard`, `Main`, `Deck`, or other custom section titles | Main + commander **unless** the name clearly matches side/maybe rows above |
+
+User-created category names like “Creatures” or “Ramp” → **Main + commander**. When unsure, note the mapping in the review.
+
+**Per-zone card list:** concatenate all `cards` entries from every category assigned to that zone; sum quantities for the **Deck zones** table.
+
+**Core evaluation:** run Scryfall / ratios / synergy / brackets / goldfish on **Main + commander** cards only—never merge side/maybe quantities into those steps. SB/MB remain separate optional add hints.
+
+If `curl` fails, use exported JSON into `decks/incoming/` and apply the same rules.
 
 ## Scryfall — collection (bulk by name)
 
