@@ -1,17 +1,34 @@
 ---
-description: EvalDragons deck file conventions and skill usage
+description: EvalDragons deck file conventions and functional taxonomy
 globs: decks/**/*.{md,txt},reviews/**/*.md,**/*deck*.md
 alwaysApply: false
 ---
 
-# EDH deck files (EvalDragons)
+# EDH deck files (EvalDragons Structural Logic)
 
-When editing files under `decks/` or `*deck*.md` in this repo:
+When managing files under `decks/` or `reviews/`, you must treat the decklist as a structured database rather than a flat text file.
 
-- **Duplicate deck URL:** Before saving under `decks/` or `reviews/`, if the same `Source:` URL or builder deck id already exists in the repo, **tell the user** which file(s) match and **ask** whether to **update existing** or **create new**—do not overwrite or add a parallel file without that choice (unless the user already said which to do or `@`-named a specific path to edit).
-- Follow section headers in [`deck-organization.md`](../../deck-organization.md).
-- Include `Source: <Moxfield or Archidekt URL>` when the list comes from the web.
-- For **URL-driven reviews**, the agent **parses and reports** mainboard, sideboard, and maybeboard **separately** (Moxfield JSON keys; Archidekt **each row’s `cards[].categories`** tags), then evaluates **main deck + commander only** for core analysis. SB/MB may appear only as **optional add hints**; improvements are **not** restricted to cards already in SB/MB.
-- Optional YAML frontmatter: `target_bracket: <1-5>` for Wizards Commander Brackets.
-- For reviews and tuning, use the **edh-deck-review** project skill (`.cursor/skills/edh-deck-review/SKILL.md`).
-- Prefer **Scryfall** links (`scryfall_uri`) in notes when referencing oracle text.
+## 1. File Conflict & Update Protocol
+- [cite_start]**Duplicate Check:** Before saving, check for existing `Source:` URLs or builder IDs[cite: 10, 11].
+- [cite_start]**User Agency:** If a match exists, you must explicitly ask to **update existing** or **create new** before writing data.
+- [cite_start]**Source Transparency:** Always include the `Source: <URL>` in the header for tracking.
+
+## 2. Functional Taxonomy (The 8x8 Framework)
+When reviewing or organizing a deck, categorize non-land cards into **Functional Slots** rather than just card types:
+- **Engine:** Triggers for the Commander (e.g., ETB for Norin).
+- **Payoffs:** Cards that turn triggers into wins (e.g., Burn/Drain).
+- **Protection:** Keeping the engine alive.
+- **Utility:** Card draw, ramp, and interaction.
+- **Dead Weight:** Identify "Generic Goodstuff" that lacks synergy.
+
+## 3. Metadata & Bracket Integration
+- [cite_start]**Bracket Analysis:** Include `target_bracket: <1-5>` based on Wizards Commander Brackets in the YAML frontmatter[cite: 14].
+- [cite_start]**Review Skill:** Utilize the `.cursor/skills/edh-deck-review/SKILL.md` for all deep-dive tuning[cite: 15].
+- [cite_start]**Separation of Concerns:** Parse mainboard, sideboard, and maybeboard as distinct datasets[cite: 12]. [cite_start]Evaluate only the main deck + commander for the core report[cite: 12].
+
+## 4. Intelligent Linking
+- [cite_start]**Scryfall First:** Use `scryfall_uri` for all technical references to ensure oracle text accuracy.
+- [cite_start]**Constraint:** Improvement suggestions are not limited to the maybeboard; seek the best global fit for the deck's "Plan A"[cite: 13].
+
+## 5. Style Constraint
+- **NO EM DASHES:** This is a hard requirement for all generated file content, YAML comments, and review summaries. Use colons or parentheses for separation.
