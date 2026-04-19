@@ -13,6 +13,8 @@ curl -sS "https://api.moxfield.com/v2/decks/all/<PUBLIC_ID>" | head -c 2000
 
 Response uses `mainboard`, `commanders`, etc. as maps of card keys → `{ quantity, card: { name, ... } }`.
 
+**URL ingest — zones:** For **core evaluation** (ratios, synergy, brackets, goldfish, legality counts), use **`commanders` + `mainboard` only**. Do **not** merge **`sideboard`** or **`maybeboard`** into that list. Those zones may be summarized later as **optional add hints** only; the main upgrade search remains **Scryfall**, not “SB/MB only.”
+
 ## Archidekt
 
 - **Deck JSON**: `GET https://archidekt.com/api/decks/{deckId}/`
@@ -25,6 +27,8 @@ curl -sS "https://archidekt.com/api/decks/<DECK_ID>/" | head -c 2000
 ```
 
 Card arrays differ by API version; normalize to `{ name, quantity }`. If `curl` fails (auth, block), use exported JSON from the site UI into `decks/incoming/`.
+
+**URL ingest — zones:** Include only cards in the **main deck** (and commanders) for core evaluation. Exclude **sideboard**, **maybeboard**, and other non-main categories from ratio/bracket/synergy/goldfish work—same policy as Moxfield. Optional mention of those cards for **swap ideas** is allowed; **do not** limit improvements to cards that appear only in those zones.
 
 ## Scryfall — collection (bulk by name)
 

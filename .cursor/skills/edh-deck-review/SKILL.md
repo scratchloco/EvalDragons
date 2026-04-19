@@ -2,7 +2,9 @@
 name: edh-deck-review
 description: >-
   Evaluates Commander (EDH) decks from Moxfield or Archidekt URLs using Scryfall
-  for oracle-accurate card data, legality and bans, core slot ratios (lands,
+  for oracle-accurate card data. URL ingest uses main deck + commander only
+  (not sideboard or maybeboard) for core analysis. Legality and bans, core slot
+  ratios (lands,
   ramp, draw, removal, wipes, synergy), commander synergy axes, Wizards
   Commander Brackets and game changers, outside-list upgrade searches, and a
   four-turn goldfish narrative. Use when the user asks for an EDH deck review,
@@ -21,9 +23,11 @@ description: >-
 
 ### 1. Ingest list from URL
 
-**Moxfield**: `GET https://api.moxfield.com/v2/decks/all/{id}` — extract `id` from URLs like `https://www.moxfield.com/decks/{id}`. Merge **commanders** + **mainboard**; ignore maybeboard unless asked.
+**Scope (strict):** For builder URLs, build the evaluated list from **commander(s) + main deck only**. Do **not** include **sideboard** or **maybeboard** (or Archidekt equivalents such as sideboard / maybe / considering categories) in **any core step**: Scryfall normalization, legality table, core ratio counts, synergy matrix, bracket inventory (game changers, etc.), or goldfish hands.
 
-**Archidekt**: `GET https://archidekt.com/api/decks/{id}/` — numeric `id` from deck URLs (e.g. `.../decks/1234567/...`). Map cards from API payload to quantities + names. If blocked, use user-provided export JSON in `decks/incoming/`.
+**Moxfield**: `GET https://api.moxfield.com/v2/decks/all/{id}` — extract `id` from URLs like `https://www.moxfield.com/decks/{id}`. Use **`commanders`** + **`mainboard`** only. Ignore **`sideboard`**, **`maybeboard`**, and other zones for core evaluation.
+
+**Archidekt**: `GET https://archidekt.com/api/decks/{id}/` — numeric `id` from deck URLs (e.g. `.../decks/1234567/...`). Map cards from the **main deck** (+ commanders) only; exclude sideboard and maybe / trial categories from core evaluation. If blocked, use user-provided export JSON in `decks/incoming/` (still strip non-main zones for core counts unless the user explicitly asks to include them).
 
 Record **quantity × name**; printings are metadata only.
 
@@ -68,6 +72,8 @@ Emit a table: bucket, target, actual, delta, rationale. Commander excluded from 
 
 After gaps are clear, run **targeted** searches (`legal:commander` + identity, see `reference.md`). Return **10–25** cards with: fit reason, suggested cut, bracket impact. Verify each candidate on Scryfall before listing.
 
+**Sideboard / maybeboard and suggestions:** You may mention cards that appear in the list’s **sideboard** or **maybeboard** (or Archidekt out-of-main categories) as *optional “already in your ecosystem” add candidates*—but **do not** cap or narrow the improvement set to only those cards. The primary upgrade pool remains **Scryfall discovery** (and the main 99); treat SB/MB as a short optional subsection, not the full search space.
+
 ### 8. Wizards Commander Brackets
 
 Use **official articles** linked in `reference.md` — do not invent bracket rules. Count **game_changer** from API; flag MLD, extra turns, heuristic two-card infinites. Compare **estimated current** bracket vs user **target** (from frontmatter or message). Deliver **adjustment playbook**: cuts, swaps, adds.
@@ -86,6 +92,7 @@ Fill every section.
 ## Deck source
 - URL / file:
 - Commander:
+- **Core list scope:** main + commander only (sideboard / maybeboard excluded from counts and core analysis; see Outside-list section for optional SB/MB add hints).
 
 ## Target Commander Bracket
 - Goal (1–5):
@@ -131,6 +138,8 @@ Fill every section.
 ## Outside-list candidates
 | Add | Why | Cut | Bracket note |
 |-----|-----|-----|--------------|
+- **Primary pool:** Scryfall-driven rows above (not limited to builder zones).
+- **Optional:** Cards from sideboard/maybeboard only as extra ideas — must not replace or shrink the Scryfall-based list.
 
 ## Bracket tuning plan
 1. …
