@@ -8,7 +8,9 @@ description: >-
   ratios (lands,
   ramp, draw, removal, wipes, synergy), commander synergy axes, Wizards
   Commander Brackets and game changers, outside-list upgrade searches, and a
-  four-turn goldfish narrative. Use when the user asks for an EDH deck review,
+  four-turn goldfish narrative, build sentiment, strategic summary, recommended
+  play lines, and tutor targets by game stage when tutors are present. Use when
+  the user asks for an EDH deck review,
   power level, bracket tuning, card suggestions, or deckbuilding help in the
   EvalDragons project.
 ---
@@ -116,7 +118,7 @@ Three hands (fast / medium / flood-screw). Turns 1–4: lands, ramp, spells, man
 
 ## Report template
 
-Fill every section.
+Fill every section. Use **N/A** with a brief reason only where instructed (e.g. no tutors). Sentiment, strategy, play lines, and tutor guidance must be **grounded in the resolved main+commander list** and Scryfall text—not generic Commander advice.
 
 ```markdown
 # EDH review: <Deck name>
@@ -169,6 +171,19 @@ Fill every section.
 - Matrix summary:
 - Misaligned:
 - Cluster gaps:
+
+## Build value — general sentiment
+- Short qualitative take: is the deck coherent for its goals, under/over-built for its stated bracket, and does the card quality **support** the strategy (not a dollar value unless the user asked).
+
+## Strategic summary
+- 2–4 tight paragraphs: what the deck is trying to do, how it wins or stabilizes, main risks (speed, interaction, consistency), and how it wants the first few turns to feel.
+
+## Recommended play lines
+- Concrete **how to pilot** guidance: opening priorities (lands vs ramp vs setup), when to commit commander vs hold up mana, when to be the aggressor vs hold interaction, and 1–2 **example sequences** (real card names from the main list) for early / mid / late if relevant.
+
+## Tutor targets by game stage
+- **Include this section only if** the main+commander list contains **tutors** (cards that search library for cards, e.g. `Demonic Tutor`, `Worldly Tutor`, `Gamble`, equipment/artifact/creature tutors). If **no tutors**, write **N/A — no tutors in main+commander** and skip the table.
+- Otherwise provide a **stage table** (early ≈ turns 1–4, mid, late / win-ready). For each stage, list **the most efficient tutor targets** (3–6 per stage max) with one line each: **why this stage**, **what it enables**, and **which tutor** usually finds it.
 
 ## WOTC bracket fit
 - Game changers count:
