@@ -9,3 +9,5 @@ decks/incoming/*.json
 !decks/incoming/.gitkeep
 !decks/incoming/snail-bomber-archidekt.json
 !decks/incoming/merieke-ri-berit-archidekt.json
+!decks/incoming/roccos-blink-burn-toolbox-archidekt.json
+!decks/incoming/arcades-angry-walls-archidekt.json
