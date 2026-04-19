@@ -13,7 +13,8 @@ description: >-
   play lines, and tutor targets by game stage when tutors are present. Use when
   the user asks for an EDH deck review,
   power level, bracket tuning, card suggestions, or deckbuilding help in the
-  EvalDragons project.
+  EvalDragons project. Updates existing deck or review files in-repo when the
+  same list or URL already exists instead of creating duplicates.
 ---
 
 # EDH deck review (EvalDragons)
@@ -21,7 +22,19 @@ description: >-
 ## Source of truth
 
 - Prefer an in-repo deck note under `decks/` with `Source: <url>` and sections from [`deck-organization.md`](../../../deck-organization.md).
-- Full review write-ups: suggest saving under `reviews/` and committing.
+- Full review write-ups: save under `reviews/` and commit when useful.
+
+### Updating vs creating files (required)
+
+Before writing a **new** `decks/<name>.md` or `reviews/<name>.md`:
+
+1. **Search the repo** under `decks/` and `reviews/` for an **existing** file that already represents the same deck, using any of:
+   - **Same `Source:` URL** (normalize trailing slashes / `www` if needed), or
+   - **Same Archidekt / Moxfield deck id** in the URL, or
+   - **Explicit path** the user `@`-mentioned or pasted (always treat that file as canonical).
+2. If a match exists → **edit that file in place** (refresh lists, frontmatter, sections, or append a dated **revision note** at the top if you want history without losing the prior body). **Do not** create a second parallel deck or review file for the same deck.
+3. If **no** match → create a new file under `decks/` or `reviews/` using the usual naming conventions ([`decks/README.md`](../../../decks/README.md), [`reviews/README.md`](../../../reviews/README.md)).
+4. When the user only shares a **URL** and no file exists yet → create `decks/<slug>.md` once; on **later** reviews for the same URL, find and update that slug (or the file that already contains that `Source:` line).
 
 ## Workflow (order matters)
 

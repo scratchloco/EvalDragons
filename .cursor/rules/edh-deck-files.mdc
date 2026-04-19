@@ -1,6 +1,6 @@
 ---
 description: EvalDragons deck file conventions and skill usage
-globs: decks/**/*.{md,txt},**/*deck*.md
+globs: decks/**/*.{md,txt},reviews/**/*.md,**/*deck*.md
 alwaysApply: false
 ---
 
@@ -8,9 +8,10 @@ alwaysApply: false
 
 When editing files under `decks/` or `*deck*.md` in this repo:
 
+- **Update in place:** If a deck or review for the same list already exists under `decks/` or `reviews/` (same `Source:` URL, same builder deck id, or a path the user gave), **edit that file**—do **not** create a duplicate new file.
 - Follow section headers in [`deck-organization.md`](../../deck-organization.md).
 - Include `Source: <Moxfield or Archidekt URL>` when the list comes from the web.
-- For **URL-driven reviews**, the agent **parses and reports** mainboard, sideboard, and maybeboard **separately** (Moxfield JSON keys; Archidekt `categories[].name`), then evaluates **main deck + commander only** for core analysis. SB/MB may appear only as **optional add hints**; improvements are **not** restricted to cards already in SB/MB.
+- For **URL-driven reviews**, the agent **parses and reports** mainboard, sideboard, and maybeboard **separately** (Moxfield JSON keys; Archidekt **each row’s `cards[].categories`** tags), then evaluates **main deck + commander only** for core analysis. SB/MB may appear only as **optional add hints**; improvements are **not** restricted to cards already in SB/MB.
 - Optional YAML frontmatter: `target_bracket: <1-5>` for Wizards Commander Brackets.
 - For reviews and tuning, use the **edh-deck-review** project skill (`.cursor/skills/edh-deck-review/SKILL.md`).
 - Prefer **Scryfall** links (`scryfall_uri`) in notes when referencing oracle text.

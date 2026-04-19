@@ -1,6 +1,6 @@
 ---
 description: Verify MTG card facts via Scryfall in EvalDragons deck work
-globs: decks/**/*.{md,txt},**/*deck*.md
+globs: decks/**/*.{md,txt},reviews/**/*.md,**/*deck*.md
 alwaysApply: false
 ---
 

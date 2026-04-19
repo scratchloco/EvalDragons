@@ -6,6 +6,7 @@ Store one deck per file under `decks/`, for example `decks/my-deck.md`. Example 
 
 - **Source URL**: Moxfield or Archidekt link on its own line: `Source: https://...`  
   The agent **parses mainboard, sideboard, and maybeboard separately** from the API (see skill §1 / `reference.md`), reports counts in **Deck zones**, then uses **main + commander** only for core counts. SB/MB may be cited optionally as add ideas; suggestions are **not** limited to those zones.
+  If a file for the same **`Source:`** URL (or same builder id) already exists under `decks/` or `reviews/`, the agent **updates that file** instead of adding a duplicate.
 - **Target bracket** (optional): in frontmatter, `target_bracket: 3` (Wizards 1–5).
 - **Sections**: follow [`../deck-organization.md`](../deck-organization.md).
 
