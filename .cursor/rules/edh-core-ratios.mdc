@@ -4,23 +4,31 @@ globs: decks/**/*.{md,txt},**/*deck*.md
 alwaysApply: false
 ---
 
-# EDH core ratios (EvalDragons defaults)
+# EDH core ratios (EvalDragons Advanced)
 
-When building or reviewing Commander decks here, compare the **99** (exclude commander; lands only in Lands) to these **heuristics**. One primary bucket per nonland; document ambiguous picks.
+[cite_start]When reviewing the **99** (excluding commander ), you must perform a deterministic audit of the following metrics. Prioritize mana velocity and engine density over generic "staple" suggestions.
 
-## Targets
+## 1. The Pipeline Audit (Targets)
 
-| Bucket | Target | Notes |
-|--------|--------|--------|
-| Lands | 36–38 | Nonland **AMV < 3.0** → 34–35 OK. Landfall / very high MV → ~**40**. |
-| Mana ramp | 10–12 | Mana rocks, dorks, land ramp. |
-| Card draw | ~10 | Mix **burst** (3+ cards once) and **steady** engines. |
-| Targeted removal | 7–10 | Destroy/exile specific threats; spread types (creature / artifact / enchantment) when colors allow. |
-| Board wipes | 2–4 | Mass removal. |
-| Synergy / strategy | 25–30 | Theme, payoffs, win lines; plan tutors usually here. |
+| Bucket | Target | Velocity & Integrity Logic |
+| :--- | :--- | :--- |
+| **Lands** | [cite_start]36–38 [cite: 3] | [cite_start]If AMV < 3.0: 34–35 is acceptable[cite: 3]. [cite_start]If Landfall: 40+[cite: 3]. **Mandatory:** Audit colored sources; flag if < 20 for 3-pip cards. |
+| **Mana Ramp** | [cite_start]10–12 [cite: 4] | **Velocity Check:** 60% of ramp must be CMC 0–2. If Commander is CMC 4, ramp must be CMC 2 to ensure a Turn 3 cast. |
+| **Card Draw** | [cite_start]~10 [cite: 4] | [cite_start]**Engine Check:** Must balance **burst** (one-time +3 cards) and **steady engines** (repeatable triggers). Target 3+ steady engines. |
+| **Interaction** | 9–14 | [cite_start]**The Stack Check:** Combined count of targeted removal (7–10 [cite: 6][cite_start]) and board wipes (2–4 ). Audit for instant-speed stack interaction. |
+| **Synergy** | [cite_start]25–30  | **The Engine Test:** Every card in this slot must directly trigger or benefit from the Commander's specific mechanics. |
 
-## Output
+## 2. Strategic Constraints
+* **The "Dead Weight" Filter:** Identify generic "goodstuff" cards that do not contribute to the deck's primary "Plan A." If these exceed 15% of the non-land total, suggest cuts for synergy pieces.
+* **Banned List Enforcement:** Immediately flag and suggest replacements for **Mana Crypt**, **Jeweled Lotus**, or **Dockside Extortionist**.
+* **Non-Game Probability:** Calculate and report the probability of hitting the 4th land drop on curve based on current land/ramp counts.
 
-Reviews must include a **Core ratio table** (target, actual, delta, one-line rationale; cite AMV for land count).
+## 3. Output Format
+Reviews must include a **Technical Ratio Table**[cite: 8]:
+- **Actual vs. Target:** Compare current stats to the heuristics above.
+- **Velocity Note:** Report if the ramp speed matches the Commander's CMC.
+- **Dependency Score:** Rate (1–10) how much the deck relies on the Commander being on the board.
 
-Edge cases: see `.cursor/skills/edh-deck-review/reference.md` § Core ratio.
+## 4. Style Constraints
+- **NO EM DASHES:** Strictly avoid em dashes in all evaluations, tables, and notes; use colons, semicolons, or parentheses instead.
+- **Citations:** Always cite AMV (Average Mana Value) for land count justifications[cite: 8].
