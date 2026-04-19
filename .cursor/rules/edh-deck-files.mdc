@@ -1,0 +1,15 @@
+---
+description: EvalDragons deck file conventions and skill usage
+globs: decks/**/*.{md,txt},**/*deck*.md
+alwaysApply: false
+---
+
+# EDH deck files (EvalDragons)
+
+When editing files under `decks/` or `*deck*.md` in this repo:
+
+- Follow section headers in [`deck-organization.md`](../../deck-organization.md).
+- Include `Source: <Moxfield or Archidekt URL>` when the list comes from the web.
+- Optional YAML frontmatter: `target_bracket: <1-5>` for Wizards Commander Brackets.
+- For reviews and tuning, use the **edh-deck-review** project skill (`.cursor/skills/edh-deck-review/SKILL.md`).
+- Prefer **Scryfall** links (`scryfall_uri`) in notes when referencing oracle text.

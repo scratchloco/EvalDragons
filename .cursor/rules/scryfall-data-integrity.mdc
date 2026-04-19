@@ -1,0 +1,13 @@
+---
+description: Verify MTG card facts via Scryfall in EvalDragons deck work
+globs: decks/**/*.{md,txt},**/*deck*.md
+alwaysApply: false
+---
+
+# Scryfall data integrity
+
+For Commander deck content in this repo:
+
+- Do **not** rely on memory for oracle text, mana costs, color identity, or Commander legality.
+- Resolve cards with **Scryfall** (`/cards/named`, `/cards/collection`, or documented search URLs) before asserting mechanics.
+- If Scryfall is unreachable, say so and avoid speculative oracle wording.

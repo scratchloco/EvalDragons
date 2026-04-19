@@ -1,0 +1,26 @@
+---
+description: EvalDragons EDH core slot count targets for Commander 99
+globs: decks/**/*.{md,txt},**/*deck*.md
+alwaysApply: false
+---
+
+# EDH core ratios (EvalDragons defaults)
+
+When building or reviewing Commander decks here, compare the **99** (exclude commander; lands only in Lands) to these **heuristics**. One primary bucket per nonland; document ambiguous picks.
+
+## Targets
+
+| Bucket | Target | Notes |
+|--------|--------|--------|
+| Lands | 36–38 | Nonland **AMV < 3.0** → 34–35 OK. Landfall / very high MV → ~**40**. |
+| Mana ramp | 10–12 | Mana rocks, dorks, land ramp. |
+| Card draw | ~10 | Mix **burst** (3+ cards once) and **steady** engines. |
+| Targeted removal | 7–10 | Destroy/exile specific threats; spread types (creature / artifact / enchantment) when colors allow. |
+| Board wipes | 2–4 | Mass removal. |
+| Synergy / strategy | 25–30 | Theme, payoffs, win lines; plan tutors usually here. |
+
+## Output
+
+Reviews must include a **Core ratio table** (target, actual, delta, one-line rationale; cite AMV for land count).
+
+Edge cases: see `.cursor/skills/edh-deck-review/reference.md` § Core ratio.
