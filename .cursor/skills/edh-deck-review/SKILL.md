@@ -13,8 +13,8 @@ description: >-
   play lines, and tutor targets by game stage when tutors are present. Use when
   the user asks for an EDH deck review,
   power level, bracket tuning, card suggestions, or deckbuilding help in the
-  EvalDragons project. Updates existing deck or review files in-repo when the
-  same list or URL already exists instead of creating duplicates.
+  EvalDragons project. When the same deck URL already exists in-repo, the
+  agent surfaces the match and asks whether to update that file or create a new one.
 ---
 
 # EDH deck review (EvalDragons)
@@ -26,15 +26,15 @@ description: >-
 
 ### Updating vs creating files (required)
 
-Before writing a **new** `decks/<name>.md` or `reviews/<name>.md`:
+Whenever you are about to **save** (create or replace) a deck list or review under `decks/` or `reviews/` from a **builder URL** or `Source:` line:
 
 1. **Search the repo** under `decks/` and `reviews/` for an **existing** file that already represents the same deck, using any of:
    - **Same `Source:` URL** (normalize trailing slashes / `www` if needed), or
    - **Same Archidekt / Moxfield deck id** in the URL, or
-   - **Explicit path** the user `@`-mentioned or pasted (always treat that file as canonical).
-2. If a match exists → **edit that file in place** (refresh lists, frontmatter, sections, or append a dated **revision note** at the top if you want history without losing the prior body). **Do not** create a second parallel deck or review file for the same deck.
-3. If **no** match → create a new file under `decks/` or `reviews/` using the usual naming conventions ([`decks/README.md`](../../../decks/README.md), [`reviews/README.md`](../../../reviews/README.md)).
-4. When the user only shares a **URL** and no file exists yet → create `decks/<slug>.md` once; on **later** reviews for the same URL, find and update that slug (or the file that already contains that `Source:` line).
+   - **Explicit path** the user `@`-mentioned or pasted (treat that file as canonical—**no duplicate prompt** if they already told you which file to edit).
+2. **If one or more matches exist** → **tell the user** clearly (list each path and one-line reason, e.g. “same Archidekt id `18585903`”). Then **ask**: do they want to **update the existing file(s)** or **create a new file** (suggest a concrete new path, e.g. `decks/<slug>-v2.md` or a new dated `reviews/YYYY-MM-DD-<slug>.md`). **Do not** write or overwrite those files until they answer, unless they **already** stated “update existing” / “overwrite `<path>`” / “create new” in the same request—in which case follow that instruction.
+3. If **no** match → create a new file using the usual naming conventions ([`decks/README.md`](../../../decks/README.md), [`reviews/README.md`](../../../reviews/README.md)).
+4. **Read-only reviews** (chat-only, no repo writes) may still **mention** a matching in-repo file as a courtesy, but you do not need to block the analysis on the prompt—only block **persisting** a new/updated markdown file without a choice when a duplicate URL exists.
 
 ## Workflow (order matters)
 

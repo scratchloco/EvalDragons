@@ -8,7 +8,7 @@ alwaysApply: false
 
 When editing files under `decks/` or `*deck*.md` in this repo:
 
-- **Update in place:** If a deck or review for the same list already exists under `decks/` or `reviews/` (same `Source:` URL, same builder deck id, or a path the user gave), **edit that file**—do **not** create a duplicate new file.
+- **Duplicate deck URL:** Before saving under `decks/` or `reviews/`, if the same `Source:` URL or builder deck id already exists in the repo, **tell the user** which file(s) match and **ask** whether to **update existing** or **create new**—do not overwrite or add a parallel file without that choice (unless the user already said which to do or `@`-named a specific path to edit).
 - Follow section headers in [`deck-organization.md`](../../deck-organization.md).
 - Include `Source: <Moxfield or Archidekt URL>` when the list comes from the web.
 - For **URL-driven reviews**, the agent **parses and reports** mainboard, sideboard, and maybeboard **separately** (Moxfield JSON keys; Archidekt **each row’s `cards[].categories`** tags), then evaluates **main deck + commander only** for core analysis. SB/MB may appear only as **optional add hints**; improvements are **not** restricted to cards already in SB/MB.
