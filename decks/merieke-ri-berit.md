@@ -43,6 +43,7 @@ Offline export: [incoming/merieke-ri-berit-archidekt.json](incoming/merieke-ri-b
 
 - 1x Arcane Signet
 - 1x Chromatic Lantern
+- 1x Land Tax
 - 1x Patriar's Seal
 - 1x Sol Ring
 
@@ -89,9 +90,8 @@ Offline export: [incoming/merieke-ri-berit-archidekt.json](incoming/merieke-ri-b
 ## Synergy / strategy
 
 - 1x Blind Obedience
-- 1x Fatestitcher
+- 1x Blue Sun's Zenith
 - 1x Fellwar Stone
-- 1x Freed from the Real
 - 1x Ghostly Flicker
 - 1x Giver of Runes
 - 1x Illusionist's Bracers
@@ -129,11 +129,12 @@ _Empty on Archidekt._
 - 1x Agent of Treachery
 - 1x Aphetto Alchemist
 - 1x Archetype of Imagination
-- 1x Blue Sun's Zenith
 - 1x Bribery
 - 1x Capsize
 - 1x Dramatic Reversal
+- 1x Fatestitcher
 - 1x Finale of Revelation
+- 1x Freed from the Real
 - 1x High Market
 - 1x Intruder Alarm
 - 1x Isochron Scepter

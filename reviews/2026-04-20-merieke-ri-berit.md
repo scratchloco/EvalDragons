@@ -16,7 +16,7 @@
 |------|---------------------------|-------|
 | Main + commander | 100 | 99 main + 1 commander |
 | Sideboard | 0 | Empty on Archidekt |
-| Maybeboard | 20 | Reference options present |
+| Maybeboard | 21 | Reference options present |
 
 ## Legality & Local Bans
 
@@ -29,56 +29,56 @@ No `local_bans` in deck frontmatter.
 
 ## Core Ratios & Synergy Overrides
 
-**Nonland AMV (main 99):** about **2.57**. This Esper theft-control shell remains interactive, but your latest edits reduced combo compression.
+**Nonland AMV (main 99):** about **2.52**. You have reduced untap-combo compression and shifted into a more stable control-value profile.
 
-**Synergy overrides (steal-and-control + blink value + untap timing):**
+**Synergy overrides (steal-control + blink value + fair attrition close):**
 
-* **Lands:** 36-38 still ideal for color-intensive interaction.
-* **Ramp:** Slightly low ramp is acceptable if curve stays low and land count is stable.
-* **Interaction:** This shell naturally runs above baseline interaction by design.
+* **Lands:** 36 to 38 still ideal for Esper control sequencing.
+* **Ramp:** 6-8 is acceptable in low-curve control, but 8-10 improves floor.
+* **Draw:** Scalable draw like Blue Sun's Zenith helps late-game conversion.
 
 | Bucket | Target (see `edh-core-ratios.mdc`) | Actual (99) | Delta | Rationale / override |
 |--------|--------------------------------------|-------------|-------|----------------------|
-| Lands | 36 to 38 | 36 | -1 vs midpoint | On target for Esper control mana |
-| Mana ramp | 10 to 12 | 4 | -7 vs midpoint | Lower than baseline; compensate with land drops |
-| Card draw | ~10 | 7 | -3 | Still a little below ideal for grind mirrors |
-| Interaction (removal + wipes + stack) | 9 to 14 | 24 | +13 vs midpoint | High interaction aligns with Merieke game plan |
-| Synergy / strategy | 25 to 30 | 25 | -2 vs midpoint | Healthy theft/blink/untap density |
+| Lands | 36 to 38 | 36 | -1 vs midpoint | On-plan for color stability |
+| Mana ramp | 10 to 12 | 5 | -6 vs midpoint | Lower than baseline, but mitigated by low AMV |
+| Card draw | ~10 | 7 | -3 | Improved with Zenith; still could use one more steady source |
+| Interaction (removal + wipes + stack) | 9 to 14 | 24 | +13 vs midpoint | High interaction remains your identity |
+| Synergy / strategy | 25 to 30 | 24 | -3 vs midpoint | Balanced after combo-piece trims |
 | Utility | N/A | 3 | N/A | Protection and support slots |
 
-**Velocity note:** Turn-three Merieke remains realistic, but low ramp count makes opening-land quality more important.
+**Velocity note:** Turn-three Merieke is still common, but openers with one two-mana rock are much stronger than pure land-go keeps.
 
-**Dependency score (1 to 10):** **7**. Deck can play control without commander, but Merieke still provides the sharpest swing turns.
+**Dependency score (1 to 10):** **7**. Core control shell functions independently, with Merieke as a high-leverage engine rather than a sole win route.
 
 **Non-game check (lands):** About **52.7%** chance to see at least four lands in first ten cards (36 in 99).
 
 ## The "Plan A" Audit (Strategic Summary)
 
-* **The engine:** Control early board texture, deploy Merieke with protection, and leverage untap/blink windows for sustained advantage.
-* **The spice:** Theft plus flicker timing creates pseudo-removal and card advantage in one line.
-* **Tactical vulnerabilities:** Fast combo pods and draws with no early mana acceleration.
+* **The engine:** Protect Merieke, steal key creatures, and convert tempo into long-game card advantage.
+* **The spice:** Blink and copy support still create high-value turns without leaning on compact untap loops.
+* **Tactical vulnerabilities:** Fast combo tables and hands with no early ramp plus no cantrip smoothing.
 
 ## Interaction & Protection Quality
 
-* **Stack interaction density:** Strong and still above average for bracket-3 tables.
-* **Board wipe asymmetry:** Good when you sequence around stolen creatures and phase protection.
-* **Engine protection:** `Teferi's Protection` plus boots effects remain high-impact safeguards.
+* **Stack interaction density:** Strong for bracket-3 pods.
+* **Board wipe asymmetry:** Good with phased protection and theft timing.
+* **Engine protection:** `Teferi's Protection`, boots, and spot interaction keep commander online.
 
 ## Tutor targets by game stage
 
-**Tutors in main + commander:** light to moderate.
+**Tutors in main + commander:** light.
 
 | Stage | Targets | Why |
 |------|---------|-----|
-| Early (T1-T4) | cheap rock, protective equipment, low-cost interaction | Enables safe commander deployment |
-| Mid | theft enabler, blink piece, flexible answer | Converts tempo into persistent board control |
-| Late | value finisher or hard reset | Closes once opponents are resource constrained |
+| Early (T1-T4) | two-mana rock, protection piece, cheap interaction | Enables safe commander timing |
+| Mid | blink/copy support, flexible answer, value draw | Converts control to board leverage |
+| Late | scalable draw (`Blue Sun's Zenith`) or mass recursion line | Closes with card advantage and inevitability |
 
 ## WOTC bracket fit
 
 * **Game changers (Archidekt oracle flags):** 1 (Teferi's Protection).
-* **Other flags:** high interaction density, but reduced deterministic combo pressure.
-* **Current vs target:** Current configuration looks like a strong **high 3**.
+* **Other flags:** heavy interaction, but reduced compact combo patterns.
+* **Current vs target:** This update reads as a healthy **high 3**.
 
 Official reference: [Commander Brackets (Wizards)](https://magic.wizards.com/en/news/announcements/commander-brackets-beta-update-october-21-2025).
 
@@ -88,51 +88,51 @@ Assumptions: on the play, no opposing interaction.
 
 ### Hand A (Ideal)
 
-* **T1:** Land plus one-mana cantrip or setup.
-* **T2:** Two-mana rock.
-* **T3:** Merieke with protection or interaction up.
-* **T4:** First theft activation and board stabilization.
+* **T1:** Land plus setup spell.
+* **T2:** Two-mana ramp.
+* **T3:** Merieke with one mana up if possible.
+* **T4:** First theft/control pivot while keeping interaction online.
 
 ### Hand B (Grinder)
 
-* **T1-T2:** Tapped land sequencing and setup spell.
-* **T3:** Hold interaction, delay commander if table is explosive.
-* **T4:** Commander plus one supporting piece.
+* **T1-T2:** Land sequencing and cantrip/value setup.
+* **T3:** Hold up interaction over commander if table is explosive.
+* **T4:** Commander plus protective posture.
 
 ### Hand C (Mulligan test)
 
-* **Opening:** Three lands, no ramp, expensive reactive spells.
-* **Line:** Keepable in slower pods; mulligan in faster pods.
+* **Opening:** Three lands, no ramp, reactive-heavy hand.
+* **Line:** Keep in slower pods; mulligan in fast pods for acceleration.
 
 ## Recommended Play Lines & Piloting
 
-* **Opening hands:** Prioritize 3-land hands with at least one low-cost interaction or setup piece.
-* **Deployment timing:** Do not jam Merieke into obvious instant-speed removal unless value is immediate.
-* **Closing the game:** Convert creature control into attrition lock, then finish with sustained board leverage.
+* **Opening hands:** Prefer 3 lands plus either a two-mana rock or cheap card-selection spell.
+* **Deployment timing:** Cast Merieke when you can protect or extract immediate value.
+* **Closing the game:** Win by repeated resource denial and value conversion, not by racing combo.
 
 ## Outside-List Upgrades (The Spice Rack)
 
 | Add | Cut | Why it elevates the specific strategy | Bracket note |
 |-----|-----|----------------------------------------|--------------|
-| [Commander's Sphere](https://scryfall.com/search?q=%21%22Commander%27s%20Sphere%22) | lowest-impact flex slot | Fair ramp that also cycles to a card | Keeps power in high 3 |
-| [Fact or Fiction](https://scryfall.com/search?q=%21%22Fact%20or%20Fiction%22) | weakest cantrip slot | Midgame refill aligned with control pacing | Strong but fair |
-| [Mulldrifter](https://scryfall.com/search?q=%21%22Mulldrifter%22) | clunky top-end filler | Blink-compatible value body | Synergy upgrade without compression |
-| [Didn't Say Please](https://scryfall.com/search?q=%21%22Didn%27t%20Say%20Please%22) | most efficient hard counter | Slightly softer counter for bracket-3 pods | Lowers efficiency spike |
-| [High Market](https://scryfall.com/search?q=%21%22High%20Market%22) | weakest utility land | Clean sac outlet for stolen creatures | Thematic control utility |
+| [Talisman of Dominance](https://scryfall.com/search?q=%21%22Talisman%20of%20Dominance%22) | weakest high-CMC flex slot | Improves turn-two ramp consistency | Strong but fair for high 3 |
+| [Talisman of Progress](https://scryfall.com/search?q=%21%22Talisman%20of%20Progress%22) | lowest-impact utility slot | Better early color fixing for Merieke curve | Keeps deck smooth, not spiky |
+| [Night's Whisper](https://scryfall.com/search?q=%21%22Night%27s%20Whisper%22) | weakest one-shot cantrip | Efficient draw to maintain interaction density | Fair card velocity |
+| [Commander's Sphere](https://scryfall.com/search?q=%21%22Commander%27s%20Sphere%22) | clunky non-engine slot | Ramp plus late draw in one card | Good high-3 glue card |
+| [Fact or Fiction](https://scryfall.com/search?q=%21%22Fact%20or%20Fiction%22) | weakest low-impact draw piece | Better refill in control mirrors | Value, not combo pressure |
 
 ## Bracket tuning plan
 
-1. Stay high 3: keep current cuts to tutor/untap compression and maintain fair interaction.
-2. If still too strong: trim one additional premium counter for a slower draw engine.
-3. If too weak: add one ramp slot back before adding more hard counters.
+1. Keep high 3: preserve current anti-combo trims and avoid re-adding untap aura loops.
+2. Improve floor: add 1-2 fair ramp pieces to raise keepable opener rate.
+3. Maintain identity: keep interaction dense, but prioritize fair-rate spells over free tempo spikes.
 
 ## Organization audit
 
-* Deck file remains in EvalDragons section order.
-* Sideboard and maybeboard are separated and excluded from core math.
+* Deck file remains aligned to EvalDragons section structure.
+* Sideboard and maybeboard are properly excluded from core-ratio math.
 
 ## Prioritized changes
 
-1. Add 1-2 fair ramp slots to smooth early sequencing.
-2. Raise sustained draw count toward 8-10 for longer games.
-3. Keep interaction density, but bias toward fair-rate answers over free/ultra-efficient effects.
+1. Add two fair ramp slots to hit commander timing more reliably.
+2. Add one additional steady draw source for long pods.
+3. Keep combo-compression pieces in maybeboard for bracket-3 consistency.
