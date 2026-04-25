@@ -75,9 +75,13 @@ xychart-beta
 
 ## Tutor targets by game stage
 
-**Tutors in main + commander:** light or conditional.
+**Tutors in main + commander:** `Mystical Tutor` (instant/sorcery setup).
 
-**N/A (no dedicated broad tutors in main + commander).**
+| Stage | Targets | Why |
+|------|---------|-----|
+| Early (T1-T4) | cheap cantrip/ramp spell, one-mana interaction, setup piece | Stabilizes velocity and protects early commander turns |
+| Mid | value engine spell, flexible interaction, draw refuel spell | Keeps tempo while converting resources into cards |
+| Late | finisher spell, overload/big swing interaction, high-impact draw spell | Lets tutor act as a closer or pivot tool |
 
 ## WOTC bracket fit
 
