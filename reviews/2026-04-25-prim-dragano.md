@@ -46,6 +46,15 @@ No `local_bans` in deck frontmatter.
 | Synergy / strategy | 25 to 30 | 21 | -6 vs midpoint | Focused plan density is appropriate |
 | Utility | N/A | 1 | N/A | Support and role compression cards |
 
+```mermaid
+xychart-beta
+    title "Core Ratios: Target Midpoint vs Actual"
+    x-axis ["Lands", "Ramp", "Draw", "Interaction", "Synergy"]
+    y-axis "Card Count" 0 --> 40
+    bar "Target midpoint" [37, 11, 10, 11, 27]
+    bar "Actual" [36, 10, 13, 18, 21]
+```
+
 **Velocity note:** Prioritize turn-two setup into turn-three commander pressure or value line.
 
 **Dependency score (1 to 10):** **7**. Deck likely functions as interactive spells shell even without commander, but ceiling improves significantly when commander sticks.
