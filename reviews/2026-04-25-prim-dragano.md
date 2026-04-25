@@ -25,6 +25,8 @@
 | Main + commander (export snapshot) | **Commander legal** | None required |
 | **Mana Crypt**, **Jeweled Lotus**, **Dockside Extortionist** | **Check present cards manually** | Replace if present and outside pod agreement |
 
+Deck size check: Archidekt currently shows **101 cards** in main + commander, so trim one non-commander card to return to legal 100.
+
 No `local_bans` in deck frontmatter.
 
 ## Core Ratios & Synergy Overrides
