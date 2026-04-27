@@ -63,6 +63,13 @@ When commander strategy warrants it, adjust lands/ramp baselines and state why:
   - 0.7: functional closer that reliably ends games in this shell
   - 0.3: soft finisher/value bomb
 
+### Checklist category card lists (required)
+After the checklist table, emit category card lists showing exactly which cards were counted.
+* Include: Lands, Ramp, Card advantage, Spot removal, Board wipes, Graveyard hate, "I win".
+* Format each card as `- <qty>x <name>`.
+* Aggregate duplicate names into one line with quantity.
+* If none exist for a category, output `_None detected._`
+
 ## 3. Output Format
 Reviews must include a **Technical Ratio Table**[cite: 8]:
 - **Actual vs. Target:** Compare current stats to the heuristics above.

@@ -163,6 +163,21 @@ Add a subsection named `### Checklist Adjustment Suggestions` with 1 recommendat
 * Prefer actionable phrasing: `Add X / Cut Y`.
 * Focus on closing measured gaps, not generic staples.
 
+Checklist card lists (required):
+After the checklist table, include a subsection named `### Checklist Category Card Lists`.
+* Include one mini-list per checklist category in this order:
+  - Lands
+  - Ramp
+  - Card advantage
+  - Spot removal
+  - Board wipes
+  - Graveyard hate
+  - "I win"
+* Show each card once with quantity aggregation, format: `- <qty>x <card name>`.
+* Never repeat duplicated names as separate bullets; always collapse duplicates into one quantity line.
+* For categories scored as effective values (graveyard hate, "I win"), still show the concrete card list used for scoring.
+* If a category has no cards, print `_None detected._`
+
 ### Organization audit
 
 Compare file sections to [`deck-organization.md`](../../../deck-organization.md); call out mis-grouped cards and missing buckets.
@@ -238,6 +253,28 @@ Run three hands for 4 turns. Note lands played, spells cast, and mana floating.
 | "I win" (effective) | 1 | ... | ... | ... | ... |
 
 **Checklist score:** ... (**On-plan / Close / Off-track**)
+
+### Checklist Category Card Lists
+**Lands**
+- 1x ...
+
+**Ramp**
+- 1x ...
+
+**Card advantage**
+- 1x ...
+
+**Spot removal**
+- 1x ...
+
+**Board wipes**
+- 1x ...
+
+**Graveyard hate**
+- 1x ...
+
+**"I win"**
+- 1x ...
 
 ### Checklist Adjustment Suggestions
 * **High priority:** ...
