@@ -23,6 +23,46 @@ alwaysApply: false
 * **Banned List Enforcement:** Immediately flag and suggest replacements for **Mana Crypt**, **Jeweled Lotus**, or **Dockside Extortionist**.
 * **Non-Game Probability:** Calculate and report the probability of hitting the 4th land drop on curve based on current land/ramp counts.
 
+## 2b. Checklist fit constraints (required)
+In addition to core ratios, emit a checklist-fit scorecard using these baselines unless strategy overrides apply:
+* **Lands:** 37
+* **Ramp:** 13
+* **Card advantage:** 10
+* **Spot removal:** 8 to 10
+* **Board wipes:** 2 to 3
+* **Graveyard hate:** 2 (effective pieces)
+* **"I win":** 1 (effective finisher)
+
+### Lands and ramp must be scored separately
+Do not collapse into one "50 mana sources" number for grading. You may still show a derived total as supporting context, but checklist scoring must evaluate Lands and Ramp independently.
+
+### Decktype override hooks
+When commander strategy warrants it, adjust lands/ramp baselines and state why:
+* **Low-curve spells/tempo:** Lands 35 to 36 and Ramp 11 to 12 are acceptable with strong cantrip density.
+* **Landfall/lands-matter:** Lands may increase to 38 to 41+; ramp baseline can remain moderate.
+* **Big-mana/X-spell:** Ramp may increase to 13 to 15; lands generally stay baseline or slightly above.
+
+### Checklist fit score
+* Single-value targets: `fit_pct = min(actual / target, 1.0) * 100`
+* Range targets:
+  - in range: 100
+  - below: `(actual / low) * 100`
+  - above: `(high / actual) * 100`
+* Overall checklist score: arithmetic mean of category fit percentages.
+* Scale:
+  - 90 to 100: On-plan
+  - 75 to 89: Close
+  - below 75: Off-track
+
+### Graveyard hate and finisher classification
+* **Graveyard hate (effective pieces):**
+  - 1.0: mass exile/static lock
+  - 0.5: narrow or conditional one-shot
+* **"I win" (effective finishers):**
+  - 1.0: explicit `you win the game`
+  - 0.7: functional closer that reliably ends games in this shell
+  - 0.3: soft finisher/value bomb
+
 ## 3. Output Format
 Reviews must include a **Technical Ratio Table**[cite: 8]:
 - **Actual vs. Target:** Compare current stats to the heuristics above.

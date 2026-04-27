@@ -105,6 +105,64 @@ Use targets from `edh-core-ratios.mdc`. However, you must apply **Synergy Overri
 * Do not penalize a low creature count if the deck reliably generates tokens or copies.
 * Emit a table: bucket, target, actual, delta, rationale. Commander excluded from 99; each nonland once in a primary bucket (document judgment calls).
 
+### Checklist fit table (required)
+After the core ratio table, include a second scoring section named:
+`## Checklist Fit (37/13/10/8-10/2-3/2/1)`
+
+Checklist categories:
+1. Lands baseline: 37
+2. Ramp baseline: 13
+3. Card advantage baseline: 10
+4. Spot removal baseline: 8 to 10
+5. Board wipes baseline: 2 to 3
+6. Graveyard hate baseline: 2
+7. "I win" baseline: 1
+
+Decktype override policy (required):
+* Start from the baseline above.
+* Apply existing decktype/synergy overrides from `edh-core-ratios.mdc` and your commander-axis analysis.
+* Shift **Lands** and **Ramp** independently based on strategy:
+  - Low-curve spell velocity decks: Lands can move down (35 to 36), Ramp can move down slightly (11 to 12) only with high cantrip density.
+  - Landfall or lands-matter decks: Lands can move up (38 to 41+), Ramp baseline can stay moderate.
+  - Big-mana/X-spell decks: Ramp can move up (13 to 15), Lands generally stay in baseline band.
+* When any target is shifted, show the adjusted target and a short rationale.
+
+Checklist scoring rules (required):
+* Single-value targets (Lands, Ramp, Card advantage, Graveyard hate, "I win"):
+  - `fit_pct = min(actual / target, 1.0) * 100`
+* Range targets (Spot removal, Board wipes):
+  - in range: 100
+  - below low bound: `(actual / low) * 100`
+  - above high bound: `(high / actual) * 100`
+* Overall checklist score:
+  - arithmetic mean of all checklist fit percentages
+* Scale labels:
+  - 90 to 100: On-plan
+  - 75 to 89: Close
+  - below 75: Off-track
+
+Graveyard hate classification (required):
+* Definition: cards/effects that exile, remove, or prevent use of graveyards.
+* Count as 1.0 effective piece: mass exile or static lock.
+* Count as 0.5 effective piece: narrow or conditional one-shot hate.
+* Useful text patterns:
+  - `exile all graveyards`
+  - `exile target player's graveyard`
+  - `cards in graveyards can't`
+  - `if a card would be put into a graveyard, exile it instead`
+
+"I win" classification (required):
+* Definition: cards that end the game immediately or create an irreversible winning state.
+* Count as 1.0: explicit `you win the game`.
+* Count as 0.7: functional finisher that reliably closes in this shell.
+* Count as 0.3: soft finisher/value bomb (not a true closer by itself).
+
+Checklist suggestions block (required):
+Add a subsection named `### Checklist Adjustment Suggestions` with 1 recommendation per below-target category.
+* Mark deficits of 2 or more cards/effective points as High priority.
+* Prefer actionable phrasing: `Add X / Cut Y`.
+* Focus on closing measured gaps, not generic staples.
+
 ### Organization audit
 
 Compare file sections to [`deck-organization.md`](../../../deck-organization.md); call out mis-grouped cards and missing buckets.
@@ -167,6 +225,24 @@ Run three hands for 4 turns. Note lands played, spells cast, and mana floating.
 ## Core Ratios & Synergy Overrides
 | Bucket | Target | Actual | Delta | Rationale / Override |
 |--------|--------|--------|-------|----------------------|
+
+## Checklist Fit (37/13/10/8-10/2-3/2/1)
+| Category | Target | Actual | Gap | Fit % | Notes |
+|----------|--------|--------|-----|-------|------|
+| Lands | 37 (or override) | ... | ... | ... | ... |
+| Ramp | 13 (or override) | ... | ... | ... | ... |
+| Card advantage | 10 | ... | ... | ... | ... |
+| Spot removal | 8 to 10 | ... | ... | ... | ... |
+| Board wipes | 2 to 3 | ... | ... | ... | ... |
+| Graveyard hate (effective) | 2 | ... | ... | ... | ... |
+| "I win" (effective) | 1 | ... | ... | ... | ... |
+
+**Checklist score:** ... (**On-plan / Close / Off-track**)
+
+### Checklist Adjustment Suggestions
+* **High priority:** ...
+* **Medium priority:** ...
+* **Low priority:** ...
 
 ## The "Plan A" Audit (Strategic Summary)
 * **The Engine:** Explain exactly how the deck generates its unique advantage.
