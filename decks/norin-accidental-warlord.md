@@ -108,7 +108,7 @@ Offline export: [incoming/norin-accidental-warlord-archidekt.json](incoming/nori
 ## Sideboard (reference only; not part of core 99)
 _Excluded from ratio and bracket counts per EvalDragons skill._
 
-- 1x Ojer Axonil, Deepest Might // Temple of Power
+_None on this Archidekt export._
 
 ## Maybeboard (reference only; not part of core 99)
 _Excluded from ratio and bracket counts per EvalDragons skill._
