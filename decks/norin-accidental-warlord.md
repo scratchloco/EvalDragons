@@ -145,6 +145,7 @@ _Excluded from ratio and bracket counts per EvalDragons skill._
 - 1x Mind Stone
 - 1x Mirage Mirror
 - 1x Mount Doom
+- 1x Ojer Axonil, Deepest Might // Temple of Power
 - 1x Pandemonium
 - 1x Planar Chaos
 - 1x Powerbalance
