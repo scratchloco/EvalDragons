@@ -10,7 +10,6 @@ Source: https://archidekt.com/decks/17678719/roccos_blink_burn_toolbox
 
 Offline export: [incoming/roccos-blink-burn-toolbox-archidekt.json](incoming/roccos-blink-burn-toolbox-archidekt.json)
 
-
 ## Commander
 
 - 1x Rocco, Cabaretti Caterer
@@ -24,12 +23,8 @@ Offline export: [incoming/roccos-blink-burn-toolbox-archidekt.json](incoming/roc
 - 1x Clifftop Retreat
 - 1x Command Tower
 - 1x Exotic Orchard
-- 5x Forest
-- 1x Jetmir's Garden
 - 1x Jungle Shrine
-- 4x Mountain
 - 1x Overgrown Farmland
-- 6x Plains
 - 1x Rockfall Vale
 - 1x Rootbound Crag
 - 1x Sacred Foundry
@@ -39,8 +34,13 @@ Offline export: [incoming/roccos-blink-burn-toolbox-archidekt.json](incoming/roc
 - 1x Sundown Pass
 - 1x Temple Garden
 - 1x Thornspire Verge
+- 1x Turbulent Steppe
 - 1x Windswept Heath
 - 1x Wooded Foothills
+- 1x Yavimaya Hollow
+- 2x Forest
+- 4x Mountain
+- 8x Plains
 
 ## Ramp
 
@@ -48,6 +48,7 @@ Offline export: [incoming/roccos-blink-burn-toolbox-archidekt.json](incoming/roc
 - 1x Birds of Paradise
 - 1x Bloom Tender
 - 1x Heronblade Elite
+- 1x Llanowar Elves
 - 1x Nature's Lore
 - 1x Sol Ring
 - 1x Three Visits
@@ -55,8 +56,8 @@ Offline export: [incoming/roccos-blink-burn-toolbox-archidekt.json](incoming/roc
 ## Card draw
 
 - 1x Enduring Innocence
+- 1x Esper Sentinel
 - 1x Guardian Project
-- 1x Reprieve
 - 1x Rumor Gatherer
 - 1x Tocasia's Welcome
 - 1x Welcoming Vampire
@@ -94,6 +95,7 @@ Offline export: [incoming/roccos-blink-burn-toolbox-archidekt.json](incoming/roc
 - 1x Gandalf the White
 - 1x Genesis Chamber
 - 1x Grand Abolisher
+- 1x Helping Hand
 - 1x Impact Tremors
 - 1x Lae'zel's Acrobatics
 - 1x Mechanized Warfare
@@ -108,10 +110,8 @@ Offline export: [incoming/roccos-blink-burn-toolbox-archidekt.json](incoming/roc
 - 1x Rose Room Treasurer
 - 1x Solphim, Mayhem Dominus
 - 1x Soul Warden
-- 1x Soul's Attendant
 - 1x Squee, the Immortal
 - 1x Sterling Grove
-- 1x Warden of the Grove
 - 1x Warleader's Call
 - 1x Weftstalker Ardent
 - 1x Wirewood Symbiote
@@ -126,16 +126,7 @@ Offline export: [incoming/roccos-blink-burn-toolbox-archidekt.json](incoming/roc
 ## Sideboard (reference only — not part of core 99)
 _Excluded from ratio and bracket counts per EvalDragons skill._
 
-- 1x Baldur's Gate Wilderness
-- 1x Black Panther, Wakandan King
-- 1x Frodo Baggins
-- 1x General Kreat, the Boltbringer
-- 1x Hinterland Sanctifier
-- 1x Radiant Solar
-- 1x Rocksteady, Mutant Marauder
-- 1x Saradoc, Master of Buckland
-- 1x Tomb of Annihilation
-- 1x Virulent Emissary
+_None on this Archidekt export._
 
 ## Maybeboard (reference only)
 _Empty on Archidekt._
